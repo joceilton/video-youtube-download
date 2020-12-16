@@ -3,7 +3,7 @@ $(function() {
 	$("#formBaixar").on("submit", function(e) {  
 		
 		$(".msg").fadeIn('slow')
-		$(".msg").html("Baixando vídeo")
+		$(".msg").html("<img src='img/loading.gif'/> Aguarde ...")
 
 		e.preventDefault()
 	
@@ -14,7 +14,14 @@ $(function() {
 		data : { url : $("#url").val()},
 		
 		success : function(data) {
-			$(".msg").html(data)
+				var video = document.getElementById('videoID');
+				video.src = data;
+				video.load();
+				video.play();
+				$(".msg").text("Baixe o seu vídeo")
+				setTimeout(function() {
+				$(".msg").fadeOut('slow')
+			}, 3000)
 		},
 		
 		error : function(data) {

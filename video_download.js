@@ -3,6 +3,10 @@ const fs = require('fs')
 var path = require('path');
 var EventEmitter = require('events')
 var porcentagem
+var size
+var filename
+var output
+var url
  
 function baixarVideo(res, url, formato) {
 	
@@ -33,37 +37,41 @@ video.on('error', function error(err) {
 
   video.on('info', function(info) {
     size = info.size;
-    var output = path.join(__dirname + '/src/video/', size + '.mp4');
-    video.pipe(fs.createWriteStream(output));
+    filename = info._filename
+    url = info.url
+    res.send(url)
+    //output = path.join(__dirname + '/src/video/', filename);
+    //video.pipe(fs.createWriteStream(output));
   });
 
 
-var pos = 0;
+/*var pos = 0;
   video.on('data', function data(chunk) {
     pos += chunk.length;
     // `size` should not be 0 here.
     if (size) {
       var percent = (pos / size * 100).toFixed(2);
-      /*process.stdout.cursorTo(0);
+      process.stdout.cursorTo(0);
       process.stdout.clearLine(1);
-      process.stdout.write(percent + '%');*/
+      process.stdout.write(percent + '%');
     ee.emit('message', percent)
     }
-  });
+  });*/
   
- video.pipe(fs.createWriteStream(__dirname + "/src/video/myvideo" + "." + formato))
+ //video.pipe(fs.createWriteStream(__dirname + "/src/video/" + filename + "." + formato))
 
-video.on('complete', function complete(info) {
+/*video.on('complete', function complete(info) {
   'use strict'
   res.send('filename: ' + info._filename + ' already downloaded.')
-})
+})*/
 
 video.on('end', function(info) {
-  res.send('finished downloading!' + '<a href="'+ "/video/myvideo" + "." + formato + '"> View </a>')
+  //res.send('finished downloading!' + '<a href="'+ "/video/myvideo" + "." + formato + '"> View </a>')
+  res.send(url)
 })
 
 }
 
 module.exports = {
-	baixarVideo, porcentagem
+	baixarVideo
 }
