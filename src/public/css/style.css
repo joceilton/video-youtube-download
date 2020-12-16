@@ -1,0 +1,12 @@
+body {
+	background-color: #000;
+	color: #fff;
+}
+
+.msg {
+	display: none;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 999;
+}

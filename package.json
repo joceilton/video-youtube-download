@@ -1,0 +1,17 @@
+{
+  "name": "download-youtube",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node-dev app.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "events": "^3.2.0",
+    "exit": "^0.1.2",
+    "express": "^4.17.1",
+    "node-dev": "^6.2.0",
+    "youtube-dl": "^3.0.2"
+  }
+}
